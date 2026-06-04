@@ -1,0 +1,11 @@
+/**
+ * quote-local-pickup-checkout.css
+ */
+
+[data-quote-local-pickup] input[type='checkbox'] {
+  margin-right: 0.5em;
+}
+
+[data-quote-local-pickup] {
+  margin-bottom: 0.5em;
+}
