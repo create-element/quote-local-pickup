@@ -1,0 +1,45 @@
+# Copyright (C) 2026 Power Plugins
+# This file is distributed under the GPLv2 or later.
+msgid ""
+msgstr ""
+"Language: it_IT\n"
+"Project-Id-Version: Quote Local Pickup 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/quote-local-pickup\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-06-04T09:05:45+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: quote-local-pickup\n"
+
+#. Plugin Name of the plugin
+#: quote-local-pickup.php
+msgid "Quote Local Pickup"
+msgstr "Ritiro in negozio"
+
+#. Plugin URI of the plugin
+#: quote-local-pickup.php
+msgid "https://power-plugins.com/plugin/purchase-orders-cart-to-quote/"
+msgstr "https://power-plugins.com/plugin/purchase-orders-cart-to-quote/"
+
+#. Description of the plugin
+#: quote-local-pickup.php
+msgid "Add support for a \"Local pickup\" option to the Cart-to-quote plugin (cart-to-order-review)"
+msgstr "Aggiungere il supporto per l'opzione \"Ritiro in negozio\" al plugin Cart-to-quote (cart-to-order-review)"
+
+#. Author of the plugin
+#: quote-local-pickup.php
+msgid "Power Plugins"
+msgstr "Plugin avanzati"
+
+#. Author URI of the plugin
+#: quote-local-pickup.php
+msgid "https://power-plugins.com/"
+msgstr "https://power-plugins.com/"
+
+#: quote-local-pickup.php:45
+msgid "Do not quote for shipping - I will collect from the store"
+msgstr "Non indicarmi i costi di spedizione: verrò a ritirarlo in negozio"

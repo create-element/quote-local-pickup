@@ -1,0 +1,80 @@
+name: Build Release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Get version from tag
+        id: get_version
+        run: |
+          # Remove 'v' prefix from tag (v1.0.0 -> 1.0.0)
+          VERSION=${GITHUB_REF#refs/tags/v}
+          echo "version=${VERSION}" >> $GITHUB_OUTPUT
+          echo "Plugin version: ${VERSION}"
+
+      - name: Verify plugin header matches tag
+        run: |
+          HEADER_VERSION=$(grep -E '^\s*\*\s*Version:' quote-local-pickup.php | head -1 | sed -E 's/.*Version:\s*//' | tr -d '[:space:]')
+          if [ "${HEADER_VERSION}" != "${{ steps.get_version.outputs.version }}" ]; then
+            echo "::error::Plugin header version (${HEADER_VERSION}) does not match tag (${{ steps.get_version.outputs.version }})"
+            exit 1
+          fi
+          echo "Version OK: ${HEADER_VERSION}"
+
+      - name: Prepare plugin directory
+        run: |
+          mkdir -p build
+          rsync -av --exclude-from=.distignore ./ build/quote-local-pickup/
+
+      - name: Create versioned zip
+        run: |
+          cd build
+          zip -r quote-local-pickup-${{ steps.get_version.outputs.version }}.zip quote-local-pickup/
+          cd ..
+
+      - name: Create generic zip
+        run: |
+          cd build
+          zip -r quote-local-pickup.zip quote-local-pickup/
+          cd ..
+
+      - name: Upload versioned zip as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: quote-local-pickup-${{ steps.get_version.outputs.version }}
+          path: build/quote-local-pickup-${{ steps.get_version.outputs.version }}.zip
+
+      - name: Upload generic zip as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: quote-local-pickup
+          path: build/quote-local-pickup.zip
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            build/quote-local-pickup-${{ steps.get_version.outputs.version }}.zip
+            build/quote-local-pickup.zip
+          body: |
+            **Quote Local Pickup v${{ steps.get_version.outputs.version }}**
+
+            Download the zip file and install via WordPress admin or upload to your plugins directory.
+
+            See [CHANGELOG.md](https://github.com/${{ github.repository }}/blob/main/CHANGELOG.md) for details.
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

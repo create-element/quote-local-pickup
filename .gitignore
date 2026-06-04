@@ -1,0 +1,13 @@
+# Build output
+/build/
+*.zip
+
+# Editor backups & OS cruft
+*~
+*.bak
+.DS_Store
+Thumbs.db
+
+# Dependencies (if ever added)
+/vendor/
+/node_modules/

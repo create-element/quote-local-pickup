@@ -1,28 +1,30 @@
 /**
  * quote-local-pickup-checkout.js
+ *
+ * Injects the "local pickup" checkbox into the placeholder rendered by
+ * ppqlp_quote_button_extras(). Runs when Cart to Quote fires its
+ * `custom_quote_button_rendered` event, and is idempotent (it will not add a
+ * second checkbox if one is already present).
  */
 (function ($) {
   'use strict';
 
-  $(window).on('custom_quote_button_rendered', (event) => {
-    console.log('Rendered');
-
+  $(window).on('custom_quote_button_rendered', function () {
     const outerContainer = $('[data-quote-local-pickup]');
-    let checkbox = $(outerContainer).find('input');
-
-    if (outerContainer.length > 0 && checkbox.length === 0) {
-      const params = $(outerContainer).data('quote-local-pickup');
-
-      checkbox = $('<input type="checkbox" name="quote_local_pickup" id="quote_local_pickup" />');
-      $(checkbox).attr('id', params.fieldName);
-      $(checkbox).attr('name', params.fieldName);
-      outerContainer.append(checkbox);
-
-      const labelElement = $('<label for="quote_local_pickup"></label>');
-      $(checkbox).attr('for', params.fieldName);
-
-      labelElement.text(params.labelText);
-      outerContainer.append(labelElement);
+    if (outerContainer.length === 0 || outerContainer.find('input').length > 0) {
+      return;
     }
+
+    const params = outerContainer.data('quote-local-pickup');
+
+    const checkbox = $('<input type="checkbox" value="yes" />')
+      .attr('id', params.fieldName)
+      .attr('name', params.fieldName);
+
+    const label = $('<label></label>')
+      .attr('for', params.fieldName)
+      .text(params.labelText);
+
+    outerContainer.append(checkbox).append(label);
   });
 })(jQuery);
