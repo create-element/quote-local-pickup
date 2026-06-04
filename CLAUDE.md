@@ -70,7 +70,8 @@ The parent plugin lives at
   before it's added (e.g. to charge for pickup or add meta).
 
 Full developer/admin docs live in `docs/` (`how-it-works.md`, `installation.md`,
-`hooks.md`, `troubleshooting.md`); `README.md` is the lean entry point that links into them.
+`hooks.md`, `troubleshooting.md`, `security.md`); `README.md` is the lean entry point that
+links into them.
 
 ## Critical data flow (read before changing the checkbox handling)
 
@@ -115,9 +116,10 @@ after the action), so don't rely on order meta inside this hook.
 - `META_IS_A_QUOTE = '_is_a_quote'`.
 - `OPT_CREATED_VIA = 'wc_pp_cto_created_via'`.
 
-## Clean-up backlog
+## Status
 
-Resolved in v0.4.0:
+Shipped in **1.0.0** (tag `v1.0.0`; the tag builds the zips via
+`.github/workflows/release.yml`):
 
 - Reads the checkbox from the sanitized `$data` argument (with `$_POST` fallback) instead
   of top-level `$_POST` — verified live with quotes #14479 / #14480.
@@ -125,20 +127,19 @@ Resolved in v0.4.0:
 - `$order instanceof WC_Order` guard.
 - Debug `error_log`/`wp_mail` noise removed; misconfig now logged via `wc_get_logger()`.
 - Own text domain `quote-local-pickup`; jQuery declared as a script dependency.
-- `ppqlp_pickup_method_ids` filter added.
-- `README.md` + `docs/` written.
-- PHPDoc on all functions/hooks; passes `phpcs` (WordPress standard, see `phpcs.xml`).
 - Public hooks standardised on the `ppqlp_` prefix (`ppqlp_params`,
   `ppqlp_pickup_method_ids`, `ppqlp_local_pickup_shipping_item`, `ppqlp_enqueued_assets`).
-- Release workflow (`.github/workflows/release.yml`) + `.distignore`.
+- PHPDoc on all functions/hooks; passes `phpcs` (WordPress standard, see `phpcs.xml`).
+- Dependencies enforced via the `Requires Plugins` header (WooCommerce, cart-to-order-review).
+- `/languages` (POT + bundled `.po`/`.mo`) with a named textdomain loader.
+- Docs: `README.md`, `docs/` (incl. `security.md`), `readme.txt`, `CHANGELOG.md`, `LICENSE`.
 
-Still pending:
+Watch-outs / not-yet-done:
 
-- `CHANGELOG.md`, `readme.txt`.
-- Dependency guard / admin notice when `cart-to-order-review` or WooCommerce is inactive
-  (currently assumed active).
-- Security review write-up.
-- `/languages` folder + POT for the new text domain.
+- `LICENSE` currently holds the short-form GPLv2 (preamble + warranty notice), not the
+  full terms text.
+- `readme.txt` `Tested up to:` is a best-guess value to confirm before any public listing
+  (`Contributors: powerplugins` is correct — it's Power Plugins' wordpress.org slug).
 
 ## Conventions
 

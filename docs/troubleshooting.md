@@ -37,3 +37,4 @@ set a cost.
 - [How it works](how-it-works.md)
 - [Installation & setup](installation.md)
 - [Hooks reference](hooks.md)
+- [Security](security.md)

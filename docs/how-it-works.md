@@ -56,3 +56,4 @@ set the total/taxes on the item.
 - [Installation & setup](installation.md)
 - [Hooks reference](hooks.md)
 - [Troubleshooting](troubleshooting.md)
+- [Security](security.md)

@@ -33,6 +33,7 @@ Requires WooCommerce and the Cart to Quote plugin (`cart-to-order-review`).
 - [Installation & setup](docs/installation.md) — requirements and configuring Local Pickup.
 - [Hooks reference](docs/hooks.md) — filters and actions, with examples.
 - [Troubleshooting](docs/troubleshooting.md) — common issues and fixes.
+- [Security](docs/security.md) — input/output handling and trust model.
 
 ## License
 

@@ -52,3 +52,4 @@ the cost with the
 
 - [How it works](how-it-works.md)
 - [Troubleshooting](troubleshooting.md)
+- [Security](security.md)
